@@ -1,0 +1,1475 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tocloft}
+\usepackage{cite}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{framed}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{lipsum}
+\usepackage{fontawesome5}
+\usepackage{tabularx}
+\usepackage{hyperref} % Should be loaded last
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    }
+
+\begin{document}
+\pagenumbering{roman}
+\let\cleardoublepage\clearpage
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.3\textwidth]{logo of university.jpeg.jpg} \\[1cm]
+    
+    {\Large \textbf{UNIVERSITY OF RWANDA}}\\[0.5cm]
+    {\large College of Science and Technology} \\[0.2cm]
+    {\large Department of Mathematics} \\[0.2cm]
+    {\large Applied Mathematics} \\[1cm]
+    
+    {\Large \textbf{FINAL YEAR PROJECT}} \\[1cm]
+    
+    {\LARGE \textbf{Mathematical Modeling and Analysis of}}\\[0.3cm]
+    {\LARGE \textbf{Campylobacteriosis}} \\[1cm]
+    
+    \vfill
+    
+    \textbf{Submitted by:} \\
+    Emmanuel BIZIMANA (222005280) \\
+    and \\
+    Jean De La Croix MUKESHUBUTATU (222020720)\\[1cm]
+    
+    \textbf{Supervisor:} \\
+    Dr. Jean Pierre MUHIRWA\\[2cm]
+ 
+    The Final Year Project Submitted to the College of Science and Technology with Partial Fulfilment Requirement as Award of Bachelor Degree with Honour in Applied Mathematics\\[1cm]
+    
+    \textbf{Academic Year: 2024 -- 2025}
+\end{titlepage}
+
+
+
+
+
+    \chapter*{ Declaration}
+    \addcontentsline{toc}{chapter}{Declaration}
+
+
+
+\vspace{1em}
+
+We, \textbf{Emmanuel BIZIMANA} and  \textbf{Jean De La Croix MUKESHUBUTATU}, hereby we declare that, to the best of our knowledge, this thesis is our own original work. It has not been presented elsewhere for an academic award. The references used are mentioned as recommended. This work was done under the supervision of Doctor \textbf{Jean Pierre MUHIRWA}.
+
+\vspace{2em}
+
+\noindent
+\textbf{Student Name:} Emmanuel BIZIMANA
+
+\vspace{1em}
+
+\noindent
+\textbf{Student Registration Number:} \dotfill
+
+\vspace{1em}
+
+\noindent
+\textbf{Signature:} \dotfill
+
+\vspace{1em}
+\noindent
+\textbf{Student Name:} Jean De La Croix MUKESHUBUTATU
+
+\vspace{1em}
+
+\noindent
+\textbf{Student Registration Number:} \dotfill
+
+\vspace{1em}
+
+\noindent
+\textbf{Signature:} \dotfill
+
+\textbf{Date:} \dotfill
+
+\newpage
+
+    \chapter*{  APPROVAL}
+    \addcontentsline{toc}{chapter}{Approval}
+
+
+\vspace{2em}
+
+This is to certify that the project titled \textbf{“Mathematical Modeling and Analysis of campylobacteriosis”} submitted by \textbf{Emmanuel Bizimana} (Reg. No: 222005280) and \textbf{Jean De La Croix MUKESHUBUTATU} (Reg.No: 222020720) for partial fulfillment of the requirements for the degree of \textbf{Bachelor of Science in Applied Mathematics} at the \textbf{University of Rwanda, College of Science and Technology}, has been examined and is approved.
+
+\vspace{3em}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+    \underline{\textbf{Supervisor:}} \\
+
+\vspace{0.2em}
+    
+    \textit{Dr. Jean Pierre MUHIRWA }\\
+    \textit{Department of Mathematics} \\
+    \textit{University of Rwanda}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+    \underline{\textbf{Head of Department:}} \\
+
+\vspace{0.2em}
+
+    \textit{Dr. Celestin KURUJYIBWAMI} \\
+    \textit{Department of Mathematics} \\
+    \textit{University of Rwanda}
+\end{minipage}
+
+
+
+
+
+
+\newpage
+
+
+
+
+    \chapter*{ Dedication}
+    \addcontentsline{toc}{chapter}{Dedication}
+
+ This thesis is dedicated to our parents, who have always been our unwavering source of support and encouragement throughout my academic journey. We also dedicate this work to our lovely colleagues for support and team working.
+
+\newpage
+
+
+    
+
+\chapter*{ Acknowledgment}
+\addcontentsline{toc}{chapter}{Acknowledgment}
+
+
+First and foremost, we would like to express our heartfelt gratitude to the Almighty God for granting us the strength, wisdom, and perseverance throughout the course of this project and our academic journey. we are deeply grateful to our supervisor, \textbf{Dr. Jean Pierre Muhirwa}, for his invaluable guidance, encouragement, and support throughout the development of this research project. His expertise and mentorship have been instrumental in shaping the quality and direction of our work. We extend our sincere appreciation to our family for their constant love, prayers, and unwavering support. Their belief in us has been a source of motivation and strength in moments of challenge.
+
+Our thanks also go to the \textbf{University of Rwanda}, especially the \textbf{Department of Mathematics}, for providing an enabling academic environment and the resources needed to complete this work successfully. We are also thankful to our classmates for the spirit of teamwork, mutual support, and collaboration that we shared. Their willingness to help and learn together made this academic journey enriching and enjoyable.
+
+To all who contributed in one way or another to the success of this project, We are  truly grateful.
+
+
+
+
+
+
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+Campylobacteriosis is a common bacterial infection that causes stomach illness in people, mainly from eating or drinking contaminated food or water. This study uses a mathematical model to understand how the disease spreads in Rwanda. The model includes different groups of people and the role of bacteria in the environment. We used data from other studies to estimate the values of important factors in the model and then ran computer simulations. The results showed that the disease spreads very quickly when no control measures are used. The basic reproduction number ($R_0$) was found to be very high, with calculated values of approximately 6987.40 and 6386.70 under different assumptions, meaning that one infected person could lead to thousands of new cases. The number of sick, hospitalized, and deceased people increased rapidly, while the number of healthy people decreased. We also performed a sensitivity analysis to see which factors have the greatest effect on the spread of the disease. The results showed that the most important factors increasing the spread are the recruitment rate ($\Lambda$), contact rate between susceptible individuals and bacteria ($\epsilon$), and the shedding rate of bacteria from infected people ($\phi$), all with a high positive influence. On the other hand, the natural recovery rate ($\tau$), delay in treatment ($\alpha$), and natural death rate ($d$) showed strong negative effects, suggesting that higher natural death rates reduce the overall spread. These results show the need for better public health actions such as improving food hygiene, clean water, and access to medical care. 
+\end{abstract}
+
+\pagenumbering{arabic}
+
+
+\tableofcontents
+\newpage
+\listoffigures 
+\newpage
+\listoftables 
+\newpage
+
+\chapter{INTRODUCTION}
+
+
+\section{ Background of the Study}
+Campylobacteriosis is an infectious disease primarily caused by bacteria of the genus Campylobacter, with Campylobacter jejuni being the most frequently implicated species in human illness. It is recognized as one of the leading causes of bacterial gastroenteritis worldwide, affecting millions of individuals each year. According to the World Health Organization (WHO), Campylobacter is responsible for a significant proportion of foodborne diseases globally, particularly in both developed and developing countries\cite{who,FRAHA}
+
+The primary mode of transmission for Campylobacteriosis is the consumption of contaminated food and water. Undercooked poultry, unpasteurized milk, and untreated water are the most common vehicles for infection. In addition, direct contact with infected animals, especially livestock and household pets, can facilitate zoonotic transmission \cite{HUM}. Cross-contamination during food preparation is also a notable risk factor. The bacterium is highly sensitive to environmental conditions, but despite this, it remains a persistent threat due to its presence in a wide range of animal reservoirs and its low infectious dose, meaning that even small quantities can cause infection.
+
+Clinically, the disease manifests with symptoms such as diarrhea (which may be bloody), abdominal cramping, fever, nausea, and vomiting. Symptoms typically appear two to five days after exposure and can last for about a week.
+
+Campylobacteriosis was first reported in Africa in 1973, in Zaire, which is now known as the Democratic Republic of Congo (DRC)\cite{DRC}. A report published in 2007 showed that Kenya had the highest prevalence, with a rate of 16.4\% among children under the age of five. Rwanda followed with a prevalence of 15.5\%, and Ethiopia recorded 14.5\%.
+
+In Rwanda, a more recent study published in February 2025 by the Rwanda Biomedical Centre reported an overall \textit{Campylobacter} prevalence of 7.0\% among patients with diarrhea. The highest prevalence was recorded at Biryogo Health Center, with a rate of 77.8\%.\cite{BMC}
+
+
+
+
+
+
+\vspace{0.5cm}
+
+
+
+
+
+
+
+
+
+\section{ Problem Statement}
+Despite medical advancements, campylobacteriosis continues to pose a significant public health challenge due to environmental persistence and multiple transmission routes. Understanding its transmission dynamics, particularly the environmental bacterial concentration, remains complex. This study addresses the need for a comprehensive mathematical model that incorporates both human and environmental factors.
+
+\section{ Objectives}
+\textbf{General Objective:} To develop and analyze a mathematical model for the transmission dynamics of campylobacteriosis.
+
+\textbf{Specific Objectives:}
+\begin{itemize}
+  \item To formulate a compartmental model including environmental bacteria concentration.
+  \item To compute and analyze the basic reproduction number $R_0$.
+  \item To investigate the stability of disease-free and endemic equilibria.
+  \item To simulate the model and assess the impact of parameters on disease dynamics.
+\end{itemize}
+
+\section{ Significance of the Study}
+This study contributes to public health strategies by identifying key parameters influencing disease persistence. It helps policymakers and health practitioners in designing effective interventions.
+
+\section{ Scope and Limitations}
+The study focuses on human-to-environment and environment-to-human transmission pathways. It does not account for animal reservoirs or seasonality.
+ \section{ Research methodology}
+ This study employs a quantitative and analytical research methodology grounded in mathematical modeling to explore the transmission dynamics and control of campylobacteriosis. The approach involves the following components:
+ \begin{enumerate}
+
+     \item \textbf{ Mathematical Model Development}\\
+     A compartmental model will be formulated based on ordinary differential equations (ODEs) to capture the key stages in the transmission of Campylobacter. 
+     \item \textbf{ Parameter Estimation} \\
+     \begin{itemize}    
+     \item  Estimated where data is lacking using hypothetical but biologically plausible values.
+     \item  Normalized when necessary for simplification
+     \end{itemize}
+     \item \textbf{ Qualitative Analysis}
+      \begin{itemize}
+      \item Equilibrium points (disease-free and endemic).
+      \item Basic reproduction number $R_0$
+ using the next-generation matrix method
+      
+     \item Stability analysis of equilibria using Jacobian matrices and eigenvalues
+     \end{itemize}
+     \item  \textbf{Sensitivity Analysis}\\
+     Sensitivity analysis will be conducted to determine the impact of different parameters (e.g., transmission rate, recovery rate, environmental decay rate) on the value of $R_0$ . This helps prioritize intervention strategies.
+     \item \textbf{Model Validation and Interpretation} \\
+     Model predictions will be compared, where possible, with trends from existing epidemiological data or literature. The findings will be interpreted in the context of public health decision-making.
+ \end{enumerate}
+ \section{ Motivation}
+ Here are some inspirations for doing a final year project on Mathematical modelling and analysis of Campylobacteriosis: 
+ \begin{itemize}
+     \item Academic and Professional Growth: This project offers a chance to apply mathematical tools like differential equations and stability analysis to real-world health issues, enhancing research skills and preparing for careers in applied mathematics, epidemiology, or health data science.
+     \item To deeply understand the applications of mathematical modeling as a module I did
+ \end{itemize}
+ \section{ Organization of the work}
+ The first chapter is about the introduction, where the problem under consideration is shown together with methodology and objectives of the work. The second chapter is about literature review, and the third chapter is about model formulation, including the mathematical model diagram and the model's mathematical equations. Chapter four considers the model analysis, and then chapter five provides the conclusion and recommendations. 
+\newpage
+\section{Model Assumptions}
+
+\begin{enumerate}
+    \item \textbf{Population Mixing and Recruitment:} The population is assumed to mix homogeneously. Individuals are recruited into the susceptible class \( S \) at a constant rate \( \Lambda \).
+    
+    \item \textbf{Infection Process:} All individuals are born susceptible and can become exposed after contact with the environmental bacteria \( B \) via the transmission function \( f(S, B) \), which reflects the rate of new infections from the environment.
+    
+    \item \textbf{Latent Period:} Exposed individuals \( E \) are infected but not yet infectious. They progress to the infectious class \( I \) at a constant rate \( \gamma \). Exposed individuals may also die at a natural death rate \( d \).
+    
+    \item \textbf{Infectious Stage:} Individuals in the infectious class \( I \) can:
+    \begin{itemize}
+        \item Recover with treatment at a rate \( p(I) \),
+        \item Progress to the hospitalized class \( H \) at a rate \( \alpha \),
+        \item Die naturally at a rate \( d \),
+        \item Die from the disease at a rate \( \delta \),
+        \item Be removed due to other control measures at a rate \( \tau \).
+    \end{itemize}
+    
+    \item \textbf{Recovered Class:} Recovered individuals \( R \) include those who were successfully treated or naturally recovered, at the rate \( p(I) \), and possibly newly treated individuals at rate \( \mu_H \). They can lose immunity and return to the susceptible class at a rate \( \psi \). They are also subject to natural death at rate \( d \).
+    
+    \item \textbf{Hospitalized Class:} Infectious individuals who develop severe symptoms may be hospitalized at rate \( \alpha \). Hospitalized individuals may die from the disease at rate \( \beta \), or recover at rate \( \mu \).
+    
+    \item \textbf{Disease-Induced Deaths:} Individuals who die due to the disease enter the class \( D \) (for disease-induced deaths). These individuals may be removed from the system at a natural rate \( d \) (e.g., burial or decomposition).
+    
+    \item \textbf{Environmental Bacteria Concentration \( B \):} Infectious individuals shed bacteria into the environment at rate \( \phi \). The environmental bacterial concentration decays at a rate \( \eta \).
+    
+    \item \textbf{Natural Death:} A constant natural death rate \( d \) applies uniformly to all living compartments (i.e., \( S, E, I, R \)).
+\end{enumerate}
+
+
+
+
+
+
+
+\chapter{LITERATURE REVIEW}
+
+\section{Overview and Mathematical Modeling of Campylobacteriosis}
+
+Campylobacteriosis is a leading cause of bacterial gastroenteritis globally and has garnered increasing attention in recent decades due to its high incidence, zoonotic potential, and rising antimicrobial resistance. This literature review explores the evolution of knowledge surrounding Campylobacter, focusing on its epidemiology, transmission dynamics, resistance patterns, and mathematical modeling.
+
+
+
+
+
+The emergence of Campylobacter as a significant public health concern was highlighted by Dr. Jean-Paul Butzler \cite{DRC}, who traced its rise from relative obscurity to prominence. The European Union’s One Health 2021 Zoonoses Report \cite{EFSA} and the World Health Organization \cite{who} both affirm that Campylobacter remains among the most frequently reported foodborne pathogens in humans. According to the CDC \cite{CDC}, the infection typically results from ingestion of undercooked poultry, contaminated water, or unpasteurized milk, causing diarrhea, fever, and abdominal cramps.
+
+
+
+ 
+
+The growing threat of antimicrobial resistance (AMR) among Campylobacter strains has raised concerns globally. Plummer et al. \cite{SAHIN} detailed the mechanisms by which Campylobacter acquires resistance, including horizontal gene transfer and selective pressure from antibiotic overuse. A recent study conducted in Kigali, Rwanda, by Gahamanyi et al. \cite{BMC}, confirmed a high prevalence of antibiotic-resistant Campylobacter among clinical patients, underscoring the urgent need for surveillance and prudent antibiotic usage in both human and veterinary medicine.
+
+
+
+
+
+
+Campylobacter is predominantly a zoonotic pathogen, with poultry identified as the primary reservoir. O’Brien et al. \cite{HUM} discussed its role within the food production chain, highlighting how improper handling and undercooking of meat can facilitate transmission. Hill et al. \cite{NAUTA} compared risk assessment methods for Campylobacter contamination in broiler meat, emphasizing the need for effective interventions at critical control points.
+
+
+
+
+
+
+Understanding host immunity is vital in determining both individual susceptibility and broader transmission dynamics. Havelaar et al. \cite{HAVELL} reviewed the immunological response to Campylobacter, noting that while some immunity can be acquired post-infection, it is often short-lived and strain-specific. This complexity complicates efforts to design vaccines and model long-term population immunity.
+
+
+
+
+
+
+Mathematical modeling provides critical insights into the spread and control of infectious diseases. Grassly and Fraser \cite{GRSS}, as well as Keeling and Rohani \cite{K&R}, laid the theoretical foundations for modeling infectious disease dynamics, incorporating concepts like basic reproduction number ($R_0$), stability analysis, and herd immunity thresholds.
+
+Building on these principles, Furaha Michael Chuma and Edward Kanuti Ngailo \cite{FRAHA} developed a detailed compartmental model for Campylobacteriosis that integrates human transmission and an environmental bacterial reservoir. Their model includes compartments for susceptible, exposed, infected, recovered individuals, as well as bacterial concentration in the environment. They adopt a saturated incidence function to reflect behavioral or physiological limits in infection risk at high bacterial concentrations. The model’s analysis demonstrated well-posedness, boundedness, and the existence of a disease-free equilibrium (DFE). In their study, they computed the basic reproductive number \( R_0 \) and obtained different values depending on the parameter settings, particularly the recruitment rate \( \Lambda \). For instance, when \( \Lambda = 10 \), \( \Lambda = 50 \), and \( \Lambda = 100 \), the corresponding values of \( R_0 \) were found to be approximately 20, 73.1312, and 146.2622, respectively. These results highlight how sensitive the model outcomes are to changes in parameter values. 
+
+The basic reproductive number \( R_0 \) plays a critical role in understanding disease dynamics: if \( R_0 < 1 \), the infection will eventually die out in the population, while if \( R_0 > 1 \), the infection can invade and persist, potentially leading to an epidemic.
+
+
+
+
+
+Despite extensive research, several gaps remain. For instance, while hospitalization and mortality compartments are acknowledged in Chuma's model, they are not dynamically analyzed. This highlights an opportunity for future work to explore the health system burden and long-term outcomes of infection. Furthermore, while zoonotic transmission is well studied, integration of environmental and behavioral data into predictive models remains limited.
+
+
+\newpage
+
+\chapter{ METHODOLOGY AND DESIGN}
+
+
+\section{ Model Description}
+In this chapter, we build a mathematical model to show how Campylobacteriosis spreads in people. The model helps us understand how the disease moves from one stage to another and how serious it can become. It includes extra parts for people who go to the hospital and those who die, which many past studies did not include. We divide the population into groups based on their health status and show how people move between these groups using mathematical equations, and 
+We will consider the total population divided into seven compartments:
+
+   $S(t)$: Susceptible,
+  $E(t)$: Exposed,
+   $I(t)$: Infected,
+   $R(t)$: Recovered,
+   $H(t)$: Hospitalized,
+   $D(t)$: Deceased,
+   $B(t)$: disease transmissions. \\
+
+\section{Model Diagram Of Campylobacteriosis}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Screenshot 2025-05-15 144432.png}
+    \caption{Model diagram of Campylobacteriosis with Hospitalization and Deaths}
+    \label{fig:enter-label}
+\end{figure}
+\textbf{Description of Parameters used in model }
+
+\begin{itemize}
+    \item $\Lambda$: Recruitment rate (birth rate or external inflow)
+    \item $f(S,B)$: Infection rate function (depending on susceptible individuals and bacteria)
+    \item $\psi$: Feedback effect from recovered individuals to susceptible class
+    \item $\gamma$: Progression rate from exposed to infected
+    \item $p(I)$: Proportion of infected individuals moving to the recovered class
+    \item $\alpha$: Proportion of infected individuals moving to the hospitalized class
+    \item $\mu_H$: Recovery rate of hospitalized individuals
+    \item $\beta$: Death rate due to disease
+    \item $\delta$: Natural clearance of infection
+    \item $\tau$: Disease-induced death rate for infected individuals
+    \item $\phi$: Contribution of infected individuals to bacterial concentration
+    \item $\eta$: Bacteria decay rate\\
+    
+The proposed model incorporates the non-linear incidence rate on the campylobacteriosis transmission by employing an incidence function that captures saturation effects. This allows for a more realistic representation of the disease's spread, accounting for factors such as limited susceptible individuals and reduced contact rates due to awareness campaigns or preventive measures. The non-linear incidence rate is therefore defined by:\\
+\[
+\(f(S,B)=\frac{\epsilon B S}{1+kB}
+\]
+where $\epsilon > 0$ is an average transmission rate of the Campylobacter between humans and contaminated food such as chicken meat, food or water. The parameter \( k > 0 \)
+ is the saturation constant of Campylobacter in the environment proportional to the incidence of campylobacteriosis infections in humans. Then, a class of the exposed
+ individuals is formed through the incidence rate \(f(S,B)\) \cite{FRAHA}.  Furthermore, the proposed model incorporates treatment interventions to assess their impact on the disease dynamics. Treatment intervention is considered
+ using the saturated function defined as:
+ 
+\[
+\(p(I)\)=\frac{\rho I}{1+ \alpha I}
+\]
+ 
+Where $\rho$  is the maximum treatment resources applied per unit of time and $\alpha$ is the saturated factor that measures the effect of the infected individuals being delayed for treatment\cite{FRAHA}.
+
+\section{ Model Equations}
+Based on the Mass Action principle (inflows outflows) the mathematical model which governs the spread of campylobacteriosis is developed using the following first order ordinary differential equations: \\  
+\[
+\left\{
+\begin{aligned}
+\frac{dS}{dt} &= \Lambda - f(S, B) + \psi R -ds\\
+\frac{dE}{dt} &= f(S, B) - (\gamma + d)E \\
+\frac{dI}{dt} &= \gamma E - p(I) - (\alpha + d + \delta + \tau)I \\
+\frac{dR}{dt} &= p(I) + \mu_H - (d + \psi)R \\
+\frac{dH}{dt} &= \alpha I - (\mu + \beta)H \\
+\frac{dD}{dt} &= \beta H - dD \\
+\frac{dB}{dt} &= \phi I - \eta B
+\end{aligned}
+\right.
+\]
+
+\begin{enumerate}
+\renewcommand{\labelenumi}{\roman{enumi}.}
+    \item Susceptible humans get exposed when they consume the contaminated
+    food or water at the rate of infection presented by the function \(f(S,B)\),
+    which is a function of the susceptible humans and contaminated
+    reservoirs.
+    \item The disease has a latent period along which individuals can become infected
+ although not yet infectious as it is captured in the exposed compartment.
+ \item The parameters 
+ , \mu_H$ are constants and do not change over time.
+
+
+\end{enumerate}
+
+
+
+
+\section{ Model Analysis}
+
+
+\subsection{Positivity And Boundedness}
+\subsubsection{Positivity of Solutions}
+We show that all solutions of the model remain non-negative for all $t > 0$ if they start with non-negative initial conditions.
+
+\begin{itemize}
+    \item \textbf{Susceptible}:
+    \[
+    \frac{dS}{dt} = \Lambda - f(S,B) + \psi R-ds
+    \]
+    At $S=0$: $\frac{dS}{dt} = \Lambda + \psi R \geq 0$
+
+    \item \textbf{Exposed}:
+    \[
+    \frac{dE}{dt} = f(S,B) - (\gamma + d)E
+    \]
+    At $E=0$: $\frac{dE}{dt} = f(S,B) \geq 0$
+
+    \item \textbf{Infectious}:
+    \[
+    \frac{dI}{dt} = \gamma E - p(I) - (\alpha + d + \delta + \tau)I
+    \]
+    At $I=0$: $\frac{dI}{dt} = \gamma E \geq 0$
+
+    \item \textbf{Recovered}:
+    \[
+    \frac{dR}{dt} = p(I) + \mu_H - (d + \psi)R
+    \]
+    At $R=0$: $\frac{dR}{dt} = p(I) + \mu_H \geq 0$
+
+    \item \textbf{Hospitalized}:
+    \[
+    \frac{dH}{dt} = \alpha I - (\mu + \beta)H
+    \]
+    At $H=0$: $\frac{dH}{dt} = \alpha I \geq 0$
+
+    \item \textbf{Dead}:
+    \[
+    \frac{dD}{dt} = \beta H - dD
+    \]
+    At $D=0$: $\frac{dD}{dt} = \beta H \geq 0$
+
+    \item \textbf{Bacteria concentration}:
+    \[
+    \frac{dB}{dt} = \phi I - \eta B
+    \]
+    At $B=0$: $\frac{dB}{dt} = \phi I \geq 0$
+\end{itemize}
+
+\textbf{Conclusion}: If initial conditions are non-negative, then all state variables remain non-negative for all $t > 0$.
+
+
+\subsubsection{Boundedness of Solutions}
+
+
+
+
+Define the total human population:
+\[
+N(t) = S(t) + E(t) + I(t) + R(t) + H(t)
+\]
+
+Taking the derivative:
+\[
+\frac{dN}{dt} = \frac{dS}{dt} + \frac{dE}{dt} + \frac{dI}{dt} + \frac{dR}{dt} + \frac{dH}{dt}
+\]
+
+Substituting from the model:
+\[
+\frac{dN}{dt} = \Lambda - d(S + E + I + R + H) - \delta I - \tau I - \mu H - \beta H
+\]
+
+Thus,
+\[
+\frac{dN}{dt} \leq \Lambda - dN(t)
+\]
+
+Solving this inequality gives:
+\[
+N(t) \leq \frac{\Lambda}{d} + \left(N(0) - \frac{\Lambda}{d}\right)e^{-dt}
+\]
+
+Therefore,
+\[
+\limsup_{t \to \infty} N(t) \leq \frac{\Lambda}{d}
+\]
+
+Now consider the bacteria equation:
+\[
+\frac{dB}{dt} = \phi I - \eta B
+\]
+
+This is a linear ODE with bounded input $I(t)$, so $B(t)$ remains bounded.
+
+\textbf{Conclusion}: All state variables are bounded above for all $t \geq 0$.
+
+\subsection{ Disease-Free Equilibrium (DFE)}
+To find the disease-free equilibrium, we set all time derivatives to zero and assume that there is no infection in the population, i.e.,
+\[
+E = I = H =R= D = B = 0.
+\]
+
+From the first equation of the system:
+\[
+\frac{dS}{dt} = \Lambda - f(S,B) + \psi R - dS,
+\]
+at DFE, we assume \(B = 0\) and \(R = 0\), so \(f(S,0) = 0\), and we obtain:
+\[
+\frac{dS}{dt} = \Lambda - dS \Rightarrow S^0 = \frac{\Lambda}{d}.
+\]
+
+Thus, the disease-free equilibrium point is:
+\[
+(S^0, E^0, I^0, R^0, H^0, D^0, B^0) = \left( \frac{\Lambda}{d}, 0, 0, 0, 0, 0, 0 \right).
+\]
+\subsection{ Stability Analysis}
+To compute the stability analysis we use Jacobian matrix (\(J(x)\))\\
+
+\[
+J=
+\begin{bmatrix}
+\frac{\partial f_1}{\partial S} & \frac{\partial f_1}{\partial E} & \frac{\partial f_1}{\partial I} & \frac{\partial f_1}{\partial R} & \frac{\partial f_1}{\partial H} & \frac{\partial f_1}{\partial D} & \frac{\partial f_1}{\partial B} \\
+\frac{\partial f_2}{\partial S} & \frac{\partial f_2}{\partial E} & \frac{\partial f_2}{\partial I} & \frac{\partial f_2}{\partial R} & \frac{\partial f_2}{\partial H} & \frac{\partial f_2}{\partial D} & \frac{\partial f_2}{\partial B} \\
+\frac{\partial f_3}{\partial S} & \frac{\partial f_3}{\partial E} & \frac{\partial f_3}{\partial I} & \frac{\partial f_3}{\partial R} & \frac{\partial f_3}{\partial H} & \frac{\partial f_3}{\partial D} & \frac{\partial f_3}{\partial B} \\
+\frac{\partial f_4}{\partial S} & \frac{\partial f_4}{\partial E} & \frac{\partial f_4}{\partial I} & \frac{\partial f_4}{\partial R} & \frac{\partial f_4}{\partial H} & \frac{\partial f_4}{\partial D} & \frac{\partial f_4}{\partial B} \\
+\frac{\partial f_5}{\partial S} & \frac{\partial f_5}{\partial E} & \frac{\partial f_5}{\partial I} & \frac{\partial f_5}{\partial R} & \frac{\partial f_5}{\partial H} & \frac{\partial f_5}{\partial D} & \frac{\partial f_5}{\partial B} \\
+\frac{\partial f_6}{\partial S} & \frac{\partial f_6}{\partial E} & \frac{\partial f_6}{\partial I} & \frac{\partial f_6}{\partial R} & \frac{\partial f_6}{\partial H} & \frac{\partial f_6}{\partial D} & \frac{\partial f_6}{\partial B} \\
+\frac{\partial f_7}{\partial S} & \frac{\partial f_7}{\partial E} & \frac{\partial f_7}{\partial I} & \frac{\partial f_7}{\partial R} & \frac{\partial f_7}{\partial H} & \frac{\partial f_7}{\partial D} & \frac{\partial f_7}{\partial B} \\
+\end{bmatrix}
+\]
+
+\[
+J =
+\begin{bmatrix}
+-\frac{\partial f}{\partial S} & 0 & 0 & \psi & 0 & 0 & -\frac{\partial f}{\partial B} \\
+\frac{\partial f}{\partial S} & -(\gamma + d) & 0 & 0 & 0 & 0 & \frac{\partial f}{\partial B} \\
+0 & \gamma & -\left( \frac{dp}{dI} + \alpha + d + \delta + \tau \right) & 0 & 0 & 0 & 0 \\
+0 & 0 & \frac{dp}{dI} & -(d + \psi) & 0 & 0 & 0 \\
+0 & 0 & \alpha & 0 & -(\mu + \beta) & 0 & 0 \\
+0 & 0 & 0 & 0 & \beta & -d & 0 \\
+0 & 0 & \phi & 0 & 0 & 0 & -\eta \\
+\end{bmatrix}
+\]
+
+
+For disease free equilibrium: \[
+(S^0, E^0, I^0, R^0, H^0, D^0, B^0) = \left( \frac{\Lambda}{d}, 0, 0, 0, 0, 0, 0 \right).
+\]
+
+\[
+J\Big|_{\text{DFE}} =
+\begin{bmatrix}
+- \left. \frac{\partial f}{\partial S} \right|_{\left(\frac{\Lambda}{d}, 0\right)} & 0 & 0 & \psi & 0 & 0 & - \left. \frac{\partial f}{\partial B} \right|_{\left(\frac{\Lambda}{d}, 0\right)} \\
+\left. \frac{\partial f}{\partial S} \right|_{\left(\frac{\Lambda}{d}, 0\right)} & -(\gamma + d) & 0 & 0 & 0 & 0 & \left. \frac{\partial f}{\partial B} \right|_{\left(\frac{\Lambda}{d}, 0\right)} \\
+0 & \gamma & -\left( \left. \frac{dp}{dI} \right|_{0} + \alpha + d + \delta + \tau \right) & 0 & 0 & 0 & 0 \\
+0 & 0 & \left. \frac{dp}{dI} \right|_{0} & -(d + \psi) & 0 & 0 & 0 \\
+0 & 0 & \alpha & 0 & -(\mu + \beta) & 0 & 0 \\
+0 & 0 & 0 & 0 & \beta & -d & 0 \\
+0 & 0 & \phi & 0 & 0 & 0 & -\eta \\
+\end{bmatrix}
+\]
+\textbf{computations of Eigenvalues}\\
+Eigenvalues is computed using the following formula\\
+
+\[
+\det(J - \lambda I) = 0
+\]
+So the Jacobian matrix \( J \) is:
+\[
+J =
+\begin{bmatrix}
+-d & 0 & 0 & \psi & 0 & 0 & -\dfrac{\epsilon \Lambda}{d} \\
+0 & -(\gamma + d) & 0 & 0 & 0 & 0 & \dfrac{\epsilon \Lambda}{d} \\
+0 & \gamma & -A & 0 & 0 & 0 & 0 \\
+0 & 0 & \rho & -(d + \psi) & 0 & 0 & 0 \\
+0 & 0 & \alpha & 0 & -(\mu + \beta) & 0 & 0 \\
+0 & 0 & 0 & 0 & \beta & -d & 0 \\
+0 & 0 & \phi & 0 & 0 & 0 & -\eta
+\end{bmatrix}
+\]
+where \( A = \rho + \alpha + d + \delta + \tau \)
+
+Let's denote \( J - \lambda I \) as:
+\[
+J - \lambda I =
+\begin{bmatrix}
+-d - \lambda & 0 & 0 & \psi & 0 & 0 & -\dfrac{\epsilon \Lambda}{d} \\
+0 & -(\gamma + d) - \lambda & 0 & 0 & 0 & 0 & \dfrac{\epsilon \Lambda}{d} \\
+0 & \gamma & -A - \lambda & 0 & 0 & 0 & 0 \\
+0 & 0 & \rho & -(d + \psi) - \lambda & 0 & 0 & 0 \\
+0 & 0 & \alpha & 0 & -(\mu + \beta) - \lambda & 0 & 0 \\
+0 & 0 & 0 & 0 & \beta & -d - \lambda & 0 \\
+0 & 0 & \phi & 0 & 0 & 0 & -\eta - \lambda
+\end{bmatrix}
+\]
+\[
+\text{The eigenvalues of the Jacobian at the DFE are:}
+\]
+\[
+\begin{aligned}
+\lambda_1 &= 0, \\
+\lambda_2 &= -d, \\
+\lambda_3 &= -(\gamma + d), \\
+\lambda_4 &= -(\rho + \alpha + d + \delta + \tau), \\
+\lambda_5 &= -(d + \psi), \\
+\lambda_6 &= -(\mu + \beta), \\
+\lambda_7 &= -\eta.
+\end{aligned}
+\]
+
+Where:
+\begin{itemize}
+  \item \( f_S = \left. \dfrac{\partial f}{\partial S} \right|_{\left(\frac{\Lambda}{d}, 0\right)} \)
+  \item \( p'_I = \left. \dfrac{dp}{dI} \right|_{I=0} \)
+\end{itemize}
+
+ all eigenvalues have negative real parts, then the disease-free equilibrium is locally asymptotically stable. Means that it is Endemic disease
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{ Basic Reproduction Number $R_0$}
+The he basic reproduction number, denoted \(R_0\), is “the expected number of secondary cases produced in a completely susceptible population by a typical infective individual”, then on
+ average an infected individual produces less than one new infected individual over the course of its infectious period, and the infection cannot grow.
+
+ Conversely, if \(R_0 > 1\), then each infected individual produces, on average, more than one new infection, and the disease can invade the population. For the case of a single infected compartment, \(R_0 \) is simply the product of the infection rate and the mean duration of the
+ infection.\\
+ 
+ \vspace{0.2cm}
+
+ 
+ \textbf{In summary:}
+ \begin{itemize}
+    \item \( \mathcal{R}_0 < 1 \): The disease will eventually die out.
+    \item \( \mathcal{R}_0 > 1 \): The disease can invade the population and potentially cause an outbreak.
+\end{itemize}
+
+
+ 
+So $R_0$ is calculated to determine the threshold condition for disease outbreak.\\
+
+\textbf{Computation of \(R_0\)}\\
+Let us compute basic reproductive number using next generation matrix \\
+
+\vspace{0.2cm}
+\begin{itemize}
+    \item \textbf{New infections \((F)\)}
+
+\begin{center}
+   \(F\) = f(S, B)
+
+\end{center}
+
+\[
+F = \begin{bmatrix}
+f(S, B) \\
+0 \\
+0 \\
+0
+\end{bmatrix}
+\]
+\item \textbf{Transitions (\(V)\):}
+\end{itemize}
+
+
+\[
+V = \begin{bmatrix}
+(\gamma + d)E \\
+-\gamma E + (\alpha+d+\delta+\tau) I \\
+-\alpha I +(\mu+\beta)H \\
+-\phi I +\eta B
+\end{bmatrix}
+\]
+At the disease-free equilibrium \[
+(S^0, E^0, I^0, R^0, H^0, D^0, B^0) = \left( \frac{\Lambda}{d}, 0, 0, 0, 0, 0, 0 \right).
+\]
+
+Then the Jacobian matrices of \(F\) and \(V\) are :
+
+\[
+F = 
+\begin{bmatrix}
+\frac{\partial f_1}{\partial E} & \frac{\partial f_1}{\partial I} & \frac{\partial f_1}{\partial H} & \frac{\partial f_1}{\partial B} \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix}
+=
+\[
+JF|_{\text{DFE}} =
+\begin{bmatrix}
+ 0 & 0 & 0 & \dfrac{\epsilon \Lambda}{d} \\
+  0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0
+\end{bmatrix}
+\]
+
+ and \\
+ 
+\[
+JF|_{\text{DFE}} =
+\begin{bmatrix}
+ 0 & 0 & 0 & \dfrac{\epsilon \Lambda}{d} \\
+  0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0
+\end{bmatrix}
+\]
+Then\\ 
+\[
+V^{-1} =
+\begin{bmatrix}
+\frac{1}{\gamma + d} & 0 & 0 & 0 \\
+\frac{\gamma}{(\gamma + d)(\alpha + d + \delta + \tau)} & \frac{1}{\alpha + d + \delta + \tau} & 0 & 0 \\
+\frac{\alpha \gamma}{(\gamma + d)(\alpha + d + \delta + \tau)(\mu + \beta)} & \frac{\alpha}{(\alpha + d + \delta + \tau)(\mu + \beta)} & \frac{1}{\mu + \beta} & 0 \\
+\frac{\phi \gamma}{(\gamma + d)(\alpha + d + \delta + \tau)\eta} & \frac{\phi}{(\alpha + d + \delta + \tau)\eta} & 0 & \frac{1}{\eta}
+\end{bmatrix}
+\]
+\vspace{0.2cm}\textbf{Computation of next generation matrix \(FV^-1\)}
+
+\(FV^-1\) =
+\begin{bmatrix}
+ 0 & 0 & 0 & \dfrac{\epsilon \Lambda}{d} \\
+  0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0 \\
+ 0 & 0 & 0 & 0
+\end{bmatrix}
+x
+\begin{bmatrix}
+\frac{1}{\gamma + d} & 0 & 0 & 0 \\
+\frac{\gamma}{(\gamma + d)(\alpha + d + \delta + \tau)} & \frac{1}{\alpha + d + \delta + \tau} & 0 & 0 \\
+\frac{\alpha \gamma}{(\gamma + d)(\alpha + d + \delta + \tau)(\mu + \beta)} & \frac{\alpha}{(\alpha + d + \delta + \tau)(\mu + \beta)} & \frac{1}{\mu + \beta} & 0 \\
+\frac{\phi \gamma}{(\gamma + d)(\alpha + d + \delta + \tau)\eta} & \frac{\phi}{(\alpha + d + \delta + \tau)\eta} & 0 & \frac{1}{\eta}
+\end{bmatrix}
+
+\vspace{0.5cm}
+
+\[
+K = 
+FV^{-1} =
+\begin{bmatrix}
+\dfrac{\epsilon \Lambda \phi \gamma}{d (\gamma + d)(\alpha + d + \delta + \tau) \eta} &
+\dfrac{\epsilon \Lambda \phi}{d (\alpha + d + \delta + \tau) \eta} &
+0 &
+\dfrac{\epsilon \Lambda}{d \eta} \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix}
+\]
+
+
+Basic reproductive number is calculated like:
+\[
+R_0 = \rho(FV^{-1})
+\]
+where $\rho$ is spectral radius and by mathematicaly is calculated as:\[
+ \rho (K)= \max_{1 \leq i \leq m} |\lambda_i|
+\]
+Then
+\[
+R_0=\frac{\lambda \phi \gamma \epsilon}{(\gamma +d)(\alpha+d+\delta+\tau)\eta d}
+\]
+
+By replace the values of parameters $R_0  \approx 6987.396329$
+\newpage
+\textbf{Values of parameters}\\
+\end{center}
+\begin{table}[ht]
+\centering
+\begin{tabular}{l S[scientific-notation = true] S[scientific-notation = true]}
+\toprule
+Parameter & {Descriptions} & {Value } & {source}\\
+\midrule
+\Lambda & Recruitment rate & 50 & \cite{FRAHA} \\
+\(d\) &  Natural death rate of human & \(\frac{1}{65X365}\)  & \cite{FRAHA}\\
+\epsilon & Contact rate between S and B & 00058 & \cite{FRAHA} \\
+\delta & Disease induced death rate & 0.0024 & \cite{FRAHA} \\
+\tau & Natural recovery  rate of human & 0.00219 & \cite{FRAHA} \\
+\phi &  Shedding rate of Campylobacter & 0.00027 & \cite{FRAHA}\\
+\eta & Clearance rate of Campylobacter & 0.0025 & \cite{FRAHA} \\
+\gamma & Incubation period of disease & 0.2-0.5 & \cite{FRAHA} \\
+\alpha & Delay rate of treatment &  0.006 & \cite{FRAHA}\\
+\bottomrule
+\end{tabular}
+\caption[Values of parameters]{\textbf{Values of parameters}}
+  \label{tab:parameters}
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Sensitivity Analysis}
+\[
+\text{Sensitivity}_{\epsilon} = \frac{\partial R_0}{\partial \epsilon} \cdot \frac{\epsilon}{R_0}
+\]
+
+\[
+\text{Sensitivity}_{\gamma} = \frac{\partial R_0}{\partial \gamma} \cdot \frac{\gamma}{R_0}
+\]
+
+\[
+\text{Sensitivity}_{\phi} = \frac{\partial R_0}{\partial \phi} \cdot \frac{\phi}{R_0}
+\]
+
+\[
+\text{Sensitivity}_{\lambda} = \frac{\partial R_0}{\partial \lambda} \cdot \frac{\lambda}{R_0}
+\]
+
+\[
+\text{Sensitivity}_{\alpha} = \frac{\partial R_0}{\partial \alpha} \cdot \frac{\alpha}{R_0}
+\]
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l S[scientific-notation = true] S[scientific-notation = true]}
+\toprule
+Parameter & {Descriptions}  & {sensitivity index}\\
+\midrule
+\Lambda & Recruitment rate & +1.000\\
+\(d\) &  Natural death rate of human & -0.2693\\
+\epsilon & Contact rate between S and B & +1.000\\
+\delta & Disease induced death rate & -0.0121\\ 
+\tau & Natural recovery  rate of human & -0.7187\\ 
+\phi &  Shedding rate of Campylobacter & +1.000 \\
+\eta & Clearance rate of Campylobacter & -0.2690 \\
+\gamma & Incubation period of disease & +0.7310 \\
+\alpha & Delay rate of treatment &  -0.564326 \\
+\bottomrule
+\end{tabular}
+\caption[sensitivity table index]{\textbf{sensitivity index table}}
+  \label{tab:parameters}
+\end{table}
+
+
+
+
+
+\subsection{SEIBTR Model of Campylobacteriosis}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{model.draw3.png}
+    \caption{Schematic diagram of the SEIHR model for Campylobacteriosis}
+    \label{fig:seit-model}
+\end{figure}
+\subsubsection{Differential Equations of the SEIHR Model}
+
+The SEITR model divides the population into five compartments: Susceptible ($S$), Exposed ($E$), Infectious ($I$), Hospitalized  ($H$), and Recovered ($R$). The dynamics of the disease transmission are governed by the following system of differential equations:
+
+\section*{Model Equations}
+
+Consider the SEIHR model described by the following system of differential equations:
+
+\begin{align*}
+\frac{dS}{dt} &= \Lambda - f(S,B) - dS + \psi R,  \\
+\frac{dE}{dt} &= f(S,B) - \gamma E - dE,  \\
+\frac{dI}{dt} &= \gamma E - p(I) - \alpha I - (d + \delta + \tau) I,  \\
+\frac{dH}{dt} &= \alpha I - \mu H  \\
+\frac{dR}{dt} &= p(I) + \mu H - (d + \psi)R,  \\
+\frac{dB}{dt} &= \Phi I - \eta B. 
+\end{align*}
+
+
+
+
+\subsection{Computation of Disease-Free Equilibrium (DFE)}
+
+To find the Disease-Free Equilibrium (DFE), we set all the derivatives in the system to zero and assume that there is no infection in the population.
+
+We analyze the system at steady state by setting all time derivatives to zero and solving for the equilibrium values of the compartments.
+\begin{itemize}
+    \item From the bacterial equation:
+    \[
+    \frac{dB}{dt} = \Phi I - \eta B = 0 \Rightarrow B = 0.
+    \]
+    
+    \item From the exposed, infectious, and hospitalized equations:
+    \[
+    E = I = H = 0.
+    \]
+    
+    \item From the recovered equation:
+    \[
+    \frac{dR}{dt} = pI + \mu H - (d + \psi) R = 0 \Rightarrow R = 0.
+    \]
+    
+    \item From the susceptible equation:
+    \[
+    \frac{dS}{dt} = \Lambda - f(S,B) - dS + \psi R.
+    \]
+    At DFE, \( B = 0 \) implies \( f(S, B) = \dfrac{\epsilon B S}{1 + kB} = 0 \), and \( R = 0 \), so:
+    \[
+    0 = \Lambda - dS \Rightarrow S = \frac{\Lambda}{d}.
+    \]
+\end{itemize}
+
+\subsection*{Conclusion}
+
+Therefore, the Disease-Free Equilibrium (DFE) is given by:
+\[
+(S^, E^, I^, H^, R^, B^) = \left( \frac{\Lambda}{d},\ 0,\ 0,\ 0,\ 0,\ 0 \right).
+\]
+
+
+\subsubsection{Stability Analysis of Disease-Free Equilibrium}
+Let's compute the partial derivatives of each function 
+\( f_1, \ldots, f_6 \) from the system of equations, which make up the Jacobian matrix \( J \)
+
+\begin{align*}
+f_1 &= \Lambda - \frac{\epsilon B S}{1 + kB} - dS + \psi R, \\
+f_2 &= \frac{\epsilon B S}{1 + kB} - \gamma E - dE, \\
+f_3 &= \gamma E - \frac{\rho I}{1 + \alpha I} - \alpha I - (d + \delta + \tau) I, \\
+f_4 &= \alpha I - \mu H, \\
+f_5 &= \frac{\rho I}{1 + \alpha I} + \mu H - (d + \psi)R, \\
+f_6 &= \Phi I - \eta B.
+\end{align*}
+
+We compute the Jacobian matrix \( J = \left[ \frac{\partial f_i}{\partial x_j} \right] \) for \( X = (S, E, I, H, R, B) \).
+
+\subsection*{Partial derivatives for each \( f_i \)}
+
+\textbf{1. For } \( f_1 = \Lambda - \frac{\epsilon B S}{1 + kB} - dS + \psi R \):
+\begin{align*}
+\frac{\partial f_1}{\partial S} &= -d - \frac{\epsilon B}{1 + kB}, \\
+\frac{\partial f_1}{\partial R} &= \psi, \\
+\frac{\partial f_1}{\partial B} &= - \frac{\epsilon S (1 + kB) - \epsilon B S k}{(1 + kB)^2} = - \frac{\epsilon S}{(1 + kB)^2}, \\
+\text{others} &= 0.
+\end{align*}
+
+\textbf{2. For } \( f_2 = \frac{\epsilon B S}{1 + kB} - \gamma E - dE \):
+\begin{align*}
+\frac{\partial f_2}{\partial S} &= \frac{\epsilon B}{1 + kB}, \\
+\frac{\partial f_2}{\partial E} &= -(\gamma + d), \\
+\frac{\partial f_2}{\partial B} &= \frac{\epsilon S (1 + kB) - \epsilon B S k}{(1 + kB)^2} = \frac{\epsilon S}{(1 + kB)^2}, \\
+\text{others} &= 0.
+\end{align*}
+
+\textbf{3. For } \( f_3 = \gamma E - \frac{\rho I}{1 + \alpha I} - \alpha I - (d + \delta + \tau) I \):
+\begin{align*}
+\frac{\partial f_3}{\partial E} &= \gamma, \\
+\frac{\partial f_3}{\partial I} &= - \left( \frac{\rho (1 + \alpha I) - \rho I \alpha}{(1 + \alpha I)^2} + \alpha + d + \delta + \tau \right) = - \left( \frac{\rho}{(1 + \alpha I)^2} + \alpha + d + \delta + \tau \right), \\
+\text{others} &= 0.
+\end{align*}
+
+\textbf{4. For } \( f_4 = \alpha I - \mu H \):
+\begin{align*}
+\frac{\partial f_4}{\partial I} &= \alpha, \\
+\frac{\partial f_4}{\partial H} &= -\mu, \\
+\text{others} &= 0.
+\end{align*}
+
+\textbf{5. For } \( f_5 = \frac{\rho I}{1 + \alpha I} + \mu H - (d + \psi) R \):
+\begin{align*}
+\frac{\partial f_5}{\partial I} &= \frac{\rho (1 + \alpha I) - \rho I \alpha}{(1 + \alpha I)^2} = \frac{\rho}{(1 + \alpha I)^2}, \\
+\frac{\partial f_5}{\partial H} &= \mu, \\
+\frac{\partial f_5}{\partial R} &= -(d + \psi), \\
+\text{others} &= 0.
+\end{align*}
+
+\textbf{6. For } \( f_6 = \Phi I - \eta B \):
+\begin{align*}
+\frac{\partial f_6}{\partial I} &= \Phi, \\
+\frac{\partial f_6}{\partial B} &= -\eta, \\
+\text{others} &= 0.
+\end{align*}
+
+
+\]
+
+\section*{Jacobian Matrix of the System}
+
+\[
+J =
+\begin{pmatrix}
+\frac{\partial f_1}{\partial S} & \frac{\partial f_1}{\partial E} & \frac{\partial f_1}{\partial I} & \frac{\partial f_1}{\partial H} & \frac{\partial f_1}{\partial R} & \frac{\partial f_1}{\partial B} \\
+\frac{\partial f_2}{\partial S} & \frac{\partial f_2}{\partial E} & \frac{\partial f_2}{\partial I} & \frac{\partial f_2}{\partial H} & \frac{\partial f_2}{\partial R} & \frac{\partial f_2}{\partial B} \\
+\frac{\partial f_3}{\partial S} & \frac{\partial f_3}{\partial E} & \frac{\partial f_3}{\partial I} & \frac{\partial f_3}{\partial H} & \frac{\partial f_3}{\partial R} & \frac{\partial f_3}{\partial B} \\
+\frac{\partial f_4}{\partial S} & \frac{\partial f_4}{\partial E} & \frac{\partial f_4}{\partial I} & \frac{\partial f_4}{\partial H} & \frac{\partial f_4}{\partial R} & \frac{\partial f_4}{\partial B} \\
+\frac{\partial f_5}{\partial S} & \frac{\partial f_5}{\partial E} & \frac{\partial f_5}{\partial I} & \frac{\partial f_5}{\partial H} & \frac{\partial f_5}{\partial R} & \frac{\partial f_5}{\partial B} \\
+\frac{\partial f_6}{\partial S} & \frac{\partial f_6}{\partial E} & \frac{\partial f_6}{\partial I} & \frac{\partial f_6}{\partial H} & \frac{\partial f_6}{\partial R} & \frac{\partial f_6}{\partial B} \\
+\end{pmatrix}
+\]
+This become 
+
+
+\[
+J =
+\begin{pmatrix}
+- d - \dfrac{\epsilon B}{1 + kB} & 0 & 0 & 0 & \psi & - \dfrac{\epsilon S}{(1 + kB)^2} \\
+\dfrac{\epsilon B}{1 + kB} & -(\gamma + d) & 0 & 0 & 0 & \dfrac{\epsilon S}{(1 + kB)^2} \\
+0 & \gamma & - \left( \dfrac{\rho}{(1 + \alpha I)^2} + \alpha + d + \delta + \tau \right) & 0 & 0 & 0 \\
+0 & 0 & \alpha & -\mu & 0 & 0 \\
+0 & 0 & \dfrac{\rho}{(1 + \alpha I)^2} & \mu & - (d + \psi) & 0 \\
+0 & 0 & \Phi & 0 & 0 & -\eta \\
+\end{pmatrix}
+\]
+
+\section*{Jacobian Matrix at Disease-Free Equilibrium (DFE)}
+After replace Disease-Free equilibrium into Jacobian matrix,we get the following:
+As we have seen above the DFE are; 
+\[
+(S^, E^, I^, H^, R^, B^) = \left( \frac{\Lambda}{d}, 0, 0, 0, 0, 0 \right)
+\]
+
+Then, the Jacobian matrix \( J_{\text{DFE}} \) is:
+
+\[
+J_{\text{DFE}} =
+\begin{pmatrix}
+- d & 0 & 0 & 0 & \psi & - \epsilon \dfrac{\Lambda}{d} \\
+0 & -(\gamma + d) & 0 & 0 & 0 & \epsilon \dfrac{\Lambda}{d} \\
+0 & \gamma & - ( \rho + \alpha + d + \delta + \tau ) & 0 & 0 & 0 \\
+0 & 0 & \alpha & -\mu & 0 & 0 \\
+0 & 0 & \rho & \mu & - (d + \psi) & 0 \\
+0 & 0 & \Phi & 0 & 0 & -\eta \\
+\end{pmatrix}
+\]
+
+
+
+
+
+\section*{Finding Eigenvalues}
+
+To analyze stability, we compute the eigenvalues \(\lambda\) of \(J_{\text{DFE}}\) by solving:
+\[
+K=\det(J_{\text{DFE}} - \lambda I) = 0.
+\]
+
+The Jacobian matrix at the Disease-Free Equilibrium (DFE) is:
+\[
+K =
+\begin{vmatrix}
+- d-\lambda & 0 & 0 & 0 & \psi & - \epsilon \dfrac{\Lambda}{d} \\
+0 & -(\gamma + d)-\lambda & 0 & 0 & 0 & \epsilon \dfrac{\Lambda}{d} \\
+0 & \gamma & - ( \rho + \alpha + d + \delta + \tau )-\lambda & 0 & 0 & 0 \\
+0 & 0 & \alpha & -\mu-\lambda & 0 & 0 \\
+0 & 0 & \rho & \mu & - (d + \psi)-\lambda & 0 \\
+0 & 0 & \Phi & 0 & 0 & -\eta-\lambda \\
+\end{vmatrix}
+\]
+
+
+
+The Jacobian matrix at the Disease-Free Equilibrium (DFE) is a lower block-triangular matrix, meaning it has many zeros above the main diagonal. For such matrices, the eigenvalues are simply the entries on the diagonal (or the eigenvalues of the diagonal blocks, if the matrix is partitioned).
+
+Thus, we examine the diagonal entries directly to find the eigenvalues:
+
+\[
+\begin{aligned}
+\lambda_1 &= -d, \\
+\lambda_2 &= -(\gamma + d), \\
+\lambda_3 &= -(\rho + \alpha + d + \delta + \tau), \\
+\lambda_4 &= -\mu, \\
+\lambda_5 &= -(d + \psi), \\
+\lambda_6 &= -\eta.
+\end{aligned}
+\]
+
+Thefore, after Computation the eigenvalues of the Jacobian matrix at the Disease-Free Equilibrium, all  have negative real parts.
+Since all parameters are positive,  meaning the Disease-Free Equilibrium  is \textbf{locally asymptotically stable}.
+
+\subsection{Computation of the Basic Reproduction Number \(\mathcal{R}_0\)}
+
+To compute the basic reproduction number \(\mathcal{R}_0\), we use the \textbf{Next Generation Matrix Method}. We define:
+
+\begin{itemize}
+    \item \(\mathcal{F}\): the rate of appearance of new infections in each compartment,
+    \item \(\mathcal{V}\): the rate of transfer into and out of each infected compartment.
+\end{itemize}
+
+Let the infected compartments be \(E\), \(I\), and \(B\). Then we define the vectors:
+
+\[
+\mathcal{F} =
+\begin{pmatrix}
+\frac{\epsilon B S}{1 + k B} \\
+0 \\
+0
+\end{pmatrix},
+\quad
+\mathcal{V} =
+\begin{pmatrix}
+(\gamma + d)E \\
+- \gamma E + (\rho + \alpha + d + \delta + \tau) I \\
+- \Phi I + \eta B
+\end{pmatrix}
+\]
+
+At the Disease-Free Equilibrium (DFE), where \(S = \frac{\Lambda}{d}, E = I = B = 0\), we compute the Jacobians:
+
+\[
+F = \left. \frac{\partial \mathcal{F}}{\partial (E, I, B)} \right|_{\text{DFE}} =
+\begin{pmatrix}
+0 & 0 & \epsilon \dfrac{\Lambda}{d} \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix},
+\quad
+V = \left. \frac{\partial \mathcal{V}}{\partial (E, I, B)} \right|_{\text{DFE}} =
+\begin{pmatrix}
+\gamma + d & 0 & 0 \\
+- \gamma & \rho + \alpha + d + \delta + \tau & 0 \\
+0 & - \Phi & \eta
+\end{pmatrix}
+\]
+
+
+
+\[
+V^{-1} =
+\begin{pmatrix}
+\dfrac{1}{\gamma + d} & 0 & 0 \\
+\dfrac{\gamma}{(\gamma + d)(\rho + \alpha + d + \delta + \tau)} & \dfrac{1}{\rho + \alpha + d + \delta + \tau} & 0 \\
+\dfrac{\gamma \Phi}{(\gamma + d)(\rho + \alpha + d + \delta + \tau)\eta} & \dfrac{\Phi}{(\rho + \alpha + d + \delta + \tau)\eta} & \dfrac{1}{\eta}
+\end{pmatrix}
+\]
+
+The next generation matrix is:
+\[
+K = F V^{-1} =
+\[
+F =
+\begin{pmatrix}
+0 & 0 & \epsilon \dfrac{\Lambda}{d} \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+\dfrac{1}{\gamma + d} & 0 & 0 \\
+\dfrac{\gamma}{(\gamma + d)(\rho + \alpha + d + \delta + \tau)} & \dfrac{1}{\rho + \alpha + d + \delta + \tau} & 0 \\
+\dfrac{\gamma \Phi}{(\gamma + d)(\rho + \alpha + d + \delta + \tau) \eta} & \dfrac{\Phi}{(\rho + \alpha + d + \delta + \tau) \eta} & \dfrac{1}{\eta}
+\end{pmatrix}
+\]
+\[
+
+Then,
+
+K =
+\begin{pmatrix}
+\displaystyle \frac{\epsilon \Lambda \gamma \Phi}{d (\gamma + d) (\rho + \alpha + d + \delta + \tau) \eta} &
+\displaystyle \frac{\epsilon \Lambda \Phi}{d (\rho + \alpha + d + \delta + \tau) \eta} &
+\displaystyle \frac{\epsilon \Lambda}{d \eta} \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}
+\]
+\textbf{Let us find the eigen values of nex-Generation matrix}
+To find the eigenvalues of the matrix \(K\), we solve the characteristic equation:
+\[
+\det(K - \lambda I) = 0
+\]
+
+Since
+\[
+K - \lambda I =
+\begin{pmatrix}
+a - \lambda & b & c \\
+0 & -\lambda & 0 \\
+0 & 0 & -\lambda
+\end{pmatrix},
+\] Where,
+\[
+\begin{aligned}
+a &= \dfrac{\epsilon \Lambda \gamma \Phi}{d (\gamma + d)(\rho + \alpha + d + \delta + \tau)\eta}, \\
+b &= \dfrac{\epsilon \Lambda \Phi}{d (\rho + \alpha + d + \delta + \tau)\eta}, \\
+c &= \dfrac{\epsilon \Lambda}{d \eta}.
+\end{aligned}
+\]
+
+ Then we compute the determinant:
+\[
+\det(K - \lambda I) =\begin{vmatrix}
+a - \lambda & b & c \\
+0 & -\lambda & 0 \\
+0 & 0 & -\lambda
+\end{vmatrix}=
+\] (a - \lambda)\lambda^2
+\]=0
+
+So, the eigenvalues of \(K\) are:
+\[
+\lambda_1 = \dfrac{\epsilon \Lambda \gamma \Phi}{d (\gamma + d) (\rho + \alpha + d + \delta + \tau) \eta}, \quad \lambda_2 = 0, \quad \lambda_3 = 0
+\]
+
+Then the basic reproduction number \(\mathcal{R}_0\) is given by:
+\[
+\mathcal{R}_0 = \rho(F V^{-1})
+\]
+where \(\rho(\cdot)\) denotes the spectral radius (dominant eigenvalue).
+\[
+\mathcal{R}_0 = \max \left\{ a, 0, 0 \right\} = \lambda = \dfrac{\epsilon \Lambda \gamma \Phi}{d (\gamma + d)(\rho + \alpha + d + \delta + \tau)\eta}.
+\]
+
+\textbf{Values of parameters}\\
+\end{center}
+\begin{table}[h]
+\centering
+\begin{tabular}{l S[scientific-notation = true] S[scientific-notation = true]}
+\toprule
+Parameter  & {Value } & {source}\\
+\midrule
+\Lambda  & 50 & \cite{FRAHA} \\
+\(d\) & \(\frac{1}{65X365}\)  & \cite{FRAHA}\\
+\epsilon & 00058 & \cite{FRAHA} \\
+\delta & 0.0024 & \cite{FRAHA} \\
+\tau & 0.00219 & \cite{FRAHA} \\
+\phi  & 0.00027 & \cite{FRAHA}\\
+\eta & 0.0025 & \cite{FRAHA} \\
+\gamma  & 0.2-0.5 & \cite{FRAHA} \\
+\alpha &   0.006 & \cite{FRAHA}\\
+\rho & 0.001 & \cite{FRAHA}\\
+\bottomrule
+\end{tabular}
+\caption[Values of parameters]{\textbf{Values of parameters}}
+  \label{tab:parameters}
+\end{table}
+
+Then $R_0$ = 6386.69941971989
+
+
+The normalized forward sensitivity index of \( \mathcal{R}_0 \) with respect to a parameter \( p \) is defined by:
+\[
+\Upsilon_p^{\mathcal{R}_0} = \frac{\partial \mathcal{R}_0}{\partial p} \cdot \frac{p}{\mathcal{R}_0}
+\]
+
+We now compute the sensitivity indices with respect to each parameter.
+
+\begin{table}[h!]
+\centering
+\caption{\textbf{Normalized Forward Sensitivity Indices of \( \mathcal{R}_0 \)}}
+\label{tab:sensitivity_indices}
+\begin{tabular}{l S}
+\toprule
+\textbf{Parameter} & {\textbf{Sensitivity Index}} \\
+\midrule
+$\Lambda$ & 1.0000 \\
+$d$ & -1.0038 \\
+$\epsilon$ & 1.0000 \\
+$\delta$ & -0.2063 \\
+$\tau$ & -0.1883 \\
+$\Phi$ & 1.0000 \\
+$\eta$ & -1.0000 \\
+$\gamma$ & 0.0002 \\
+$\alpha$ & -0.5158 \\
+$\rho$ & -0.0860 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+\newpage
+\chapter{Result And Discussions Of The Model }
+\section{ NUMERICAL SIMULATIONS FOR SEIBHRD}
+
+
+The following are numerical solution of the campylobacteriosis model, We perform simulations under different scenarios to observe the effect of key parameters using python\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.90\linewidth]{Screenshot 2025-05-28 125033.png}
+    \caption{The dynamics of campylobacteriosis disease for $\lambda$ which is equal to 13M and others parameters with its values}
+    \label{fig:enter-label}
+\end{figure}
+
+The following is the summary of the simulation of the model at initial value of parameters?
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.00\linewidth]{combinedgraph.png}
+    \label{fig:enter-label}
+\end{figure}
+
+\textbf{Sensitivity Analysis of $R_0$ Parameter}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{sensitivityHRD.png}
+    \caption{sensitivity index analysis of SEIBHRD}
+    \label{fig:enter-label}
+\end{figure}
+
+The vertical bar plot represents the sensitivity indices of various parameters in the SEIBHRD model. Sensitivity indices indicate how changes in each parameter influence the basic reproduction number \( R_0 \). Positive values increase \( R_0 \), while negative values decrease it.
+
+\subsection*{Positive Sensitivity Indices (Green Bars)}
+These parameters have a positive influence on \( R_0 \): increasing them results in a higher reproduction number.
+\begin{itemize}label=--
+    \item \(\Lambda\) (Recruitment rate): \(+1.000\) \\
+    A very strong positive influence. Increasing recruitment (births or immigration) raises the susceptible population, increasing the potential for disease spread.
+    
+    \item \(\epsilon\) (Contact rate between \(S\) and \(B\)): \(+1.000\) \\
+    Higher contact rates increase the likelihood of transmission, raising \( R_0 \).
+    
+    \item \(\phi\) (Shedding rate of Campylobacter): \(+1.000\) \\
+    More shedding leads to greater environmental contamination, increasing exposure and infection rates.
+    
+    \item \(\gamma\) (Incubation rate): \(+0.731\) \\
+    Faster progression from exposed to infectious individuals contributes positively to \( R_0 \).
+\end{itemize}
+
+\subsection*{Negative Sensitivity Indices (Red Bars)}
+These parameters have a negative influence on \( R_0 \): increasing them helps reduce the reproduction number.
+\begin{itemize}[label=--]
+    \item \(\tau\) (Natural recovery rate of humans): \(-0.719\) \\
+    Strongly reduces \( R_0 \); quicker recovery shortens the infectious period and decreases the chance of further transmission.
+    
+    \item \(\alpha\) (Delay rate of treatment): \(-0.564\) \\
+    Although the parameter is a delay rate, increasing it corresponds to faster treatment, which helps in controlling the spread.
+    
+    \item \(d\) (Natural death rate of humans): \(-0.269\) \\
+    Slightly decreases \( R_0 \); natural deaths reduce the susceptible or infectious population.
+    
+    \item \(\eta\) (Clearance rate of Campylobacter): \(-0.269\) \\
+    Enhanced environmental clearance lowers transmission probability.
+    
+    \item \(\delta\) (Disease-induced death rate): \(-0.012\) \\
+    Weak negative effect. Higher mortality slightly reduces the number of infectious individuals, but the impact is minimal.
+\end{itemize}
+
+\subsection*{Key Takeaways}
+\begin{itemize}
+    \item The most influential positive parameters are \(\Lambda\), \(\epsilon\), and \(\phi\), each with a sensitivity index of +1.000.
+    \item The most impactful negative parameter is \(\tau\), the natural recovery rate.
+    \item Control strategies should focus on:
+    \begin{itemize}
+        \item Reducing contact rates (\(\epsilon\)) and environmental shedding (\(\phi\))
+        \item Increasing environmental clearance (\(\eta\))
+        \item Enhancing natural recovery (\(\tau\)) and speeding up treatment (\(\alpha\))
+    \end{itemize}
+\end{itemize}
+
+\section{Graphical presentetion of sensetivity index analysis for SEIBTR}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{sensitivityR_0croix.png}
+    \caption{Sensitivity analysis of SEIBTR}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+\section{Interpretation of Results}
+
+
+
+ The simulation of the Campylobacteriosis model shows a rapid and widespread outbreak, with the susceptible population (S) decreasing sharply and the infectious population (I) peaking significantly around day 150 before slowly declining. The environmental bacteria (B) increase early, sustaining transmission, while hospitalization (H) and deaths (D) rise steadily, indicating a heavy disease burden and healthcare impact. Recovery (R) remains minimal, suggesting either low recovery rates or high mortality. The extremely high basic reproduction number $R_0 \approx 6987.40$ for SEIBHRD and $R_0= 6386.69941971989$ for SEIBTR, this implies that each infected individual causes thousands of new infections, reflecting highly efficient transmission possibly amplified by environmental contamination. Such a high $R_0$ is biologically unrealistic in most real-world settings and may point to exaggerated model parameters, but it highlights the potential severity and speed of disease spread in the absence of interventions. This underscores the critical need for control measures such as sanitation, treatment, and public health education to mitigate the outbreak.
+
+
+\newpage
+
+\chapter{ CONCLUSION AND RECOMMENDATIONS}
+
+\section{ Conclusion}
+
+
+Campylobacteriosis remains a significant public health challenge, particularly in developing countries such as Rwanda, where recent studies have reported a notable prevalence among individuals suffering from diarrheal diseases. The transmission of this disease, primarily through contaminated food and water, coupled with its low infectious dose, makes it difficult to control, especially in settings with limited resources. The simulation results of the mathematical model for Campylobacteriosis highlight the severe impact the disease can have on a population in the absence of effective intervention strategies. With a very high basic reproduction number $R_0 \approx 6987.40$ and $R_0 \approx 6386.69941971989$, the model predicts a rapid spread of the disease, driven by environmental contamination and person-to-person transmission. The sharp decline in the susceptible population and the significant rise in the infected, hospitalized, and deceased classes underscore the urgency of implementing strong public health measures. These include improving food safety practices, ensuring access to clean water, public health education campaigns, promoting hygiene, and strengthening healthcare systems to manage and contain outbreaks. Overall, the findings emphasize the importance of timely and targeted interventions to reduce the transmission and mitigate the burden of Campylobacteriosis in vulnerable populations.
+
+
+\section{Recommendations}
+
+
+Based on the findings of this study, several directions for future research are recommended:
+
+\begin{enumerate}
+    \item \textbf{Parameter Refinement:} The estimated basic reproduction number ($R_0 \approx 6987.40$) was exceedingly high, which may be due to parameter overestimation. Future studies should focus on collecting more accurate, localized epidemiological data to improve model calibration and parameter sensitivity.
+
+    \item \textbf{Inclusion of Control Strategies:} The current model does not incorporate intervention measures such as vaccination, antibiotic treatment, sanitation campaigns, or food safety regulations. Future models should include these components to evaluate their effectiveness in reducing transmission.
+
+    \item \textbf{Spatial Dynamics:} Campylobacteriosis transmission can vary regionally due to differences in infrastructure, hygiene, and animal-human interactions. Incorporating spatial heterogeneity and mobility patterns into the model would offer deeper insights into localized outbreak dynamics.
+
+    
+
+    \item \textbf{Host-Pathogen Interaction:} Understanding the immune response of individuals and the bacterial behavior in various environments can enhance model realism. Future work should consider integrating immunological factors and environmental bacterial decay rates into the model structure.
+
+    \item \textbf{Economic and Social Impact Analysis:} It would be valuable to explore the economic burden and social implications of Campylobacteriosis in Rwanda. Cost-effectiveness analysis of different control measures could guide policymakers in resource-limited settings.
+
+    \item \textbf{Data-Driven Model Validation:} Future research should focus on validating the model using actual surveillance data from hospitals, health centers, and environmental sampling to ensure that predictions align with real-world patterns.
+\end{enumerate}
+
+
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{Reference}
+
+
+
+\end{document}
+

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campylobacteriosis Model Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; background-color: #f8f9fa; color: #333; }
+        #header { background-color: #343a40; color: white; padding: 20px; text-align: center; }
+        #container { display: flex; padding: 20px; }
+        #controls { width: 350px; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-right: 20px; }
+        #plot { flex-grow: 1; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .slider-container { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="range"] { width: 100%; }
+        button { background-color: #007bff; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>Campylobacteriosis Transmission Dynamics</h1>
+    </div>
+    <div id="container">
+        <div id="controls">
+            <h2>Model Parameters</h2>
+            <div id="parameter-sliders"></div>
+            <button id="run-button">Run Simulation</button>
+        </div>
+        <div id="plot"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const socket = io();
+            const slidersContainer = document.getElementById('parameter-sliders');
+            const runButton = document.getElementById('run-button');
+
+            const parameters = {
+                Lambda: { min: 1, max: 100, value: 50, step: 1, name: 'Recruitment Rate (Λ)' },
+                d: { min: 0.00001, max: 0.0001, value: 0.000042, step: 0.00001, name: 'Natural Death Rate (d)' },
+                epsilon: { min: 0.0001, max: 0.001, value: 0.00058, step: 0.00001, name: 'Contact Rate (ε)' },
+                k: { min: 0.0001, max: 0.01, value: 0.001, step: 0.0001, name: 'Saturation Constant (k)' },
+                psi: { min: 0.001, max: 0.1, value: 0.01, step: 0.001, name: 'Immunity Loss Rate (ψ)' },
+                gamma: { min: 0.1, max: 0.5, value: 0.2, step: 0.01, name: 'Progression Rate (γ)' },
+                rho: { min: 0.0001, max: 0.01, value: 0.001, step: 0.0001, name: 'Max Treatment Rate (ρ)' },
+                alpha: { min: 0.001, max: 0.01, value: 0.006, step: 0.001, name: 'Hospitalization Rate (α)' },
+                delta: { min: 0.001, max: 0.01, value: 0.0024, step: 0.0001, name: 'Disease Death Rate (δ)' },
+                tau: { min: 0.001, max: 0.01, value: 0.00219, step: 0.0001, name: 'Natural Recovery Rate (τ)' },
+                mu: { min: 0.01, max: 0.2, value: 0.1, step: 0.01, name: 'Hospital Recovery Rate (μ)' },
+                beta: { min: 0.01, max: 0.1, value: 0.05, step: 0.01, name: 'Hospital Death Rate (β)' },
+                phi: { min: 0.0001, max: 0.001, value: 0.00027, step: 0.00001, name: 'Bacteria Shedding Rate (φ)' },
+                eta: { min: 0.001, max: 0.01, value: 0.0025, step: 0.001, name: 'Bacteria Decay Rate (η)' },
+            };
+
+            for (const [key, config] of Object.entries(parameters)) {
+                const sliderDiv = document.createElement('div');
+                sliderDiv.classList.add('slider-container');
+                sliderDiv.innerHTML = `
+                    <label for="${key}">${config.name}: <span id="${key}-value">${config.value}</span></label>
+                    <input type="range" id="${key}" min="${config.min}" max="${config.max}" value="${config.value}" step="${config.step}">
+                `;
+                slidersContainer.appendChild(sliderDiv);
+
+                const slider = document.getElementById(key);
+                const valueSpan = document.getElementById(`${key}-value`);
+                slider.addEventListener('input', () => valueSpan.textContent = slider.value);
+            }
+
+            runButton.addEventListener('click', () => {
+                const currentParams = {};
+                for (const key of Object.keys(parameters)) {
+                    currentParams[key] = parseFloat(document.getElementById(key).value);
+                }
+                socket.emit('run_simulation', { params: currentParams });
+            });
+
+            socket.on('simulation_result', function(data) {
+                const traces = [
+                    { x: data.time, y: data.S, name: 'Susceptible' },
+                    { x: data.time, y: data.E, name: 'Exposed' },
+                    { x: data.time, y: data.I, name: 'Infected' },
+                    { x: data.time, y: data.R, name: 'Recovered' },
+                    { x: data.time, y: data.H, name: 'Hospitalized' },
+                    { x: data.time, y: data.D, name: 'Deceased' },
+                ];
+                const layout = {
+                    title: 'Campylobacteriosis Model Simulation',
+                    xaxis: { title: 'Time (Days)' },
+                    yaxis: { title: 'Number of Individuals' }
+                };
+                Plotly.newPlot('plot', traces, layout);
+            });
+
+            // The simulation is now triggered only by a manual button click.
+        });
+    </script>
+</body>
+</html>
